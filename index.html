@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fas fa-boxes"></i>
+                <h1>Dashboard</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li class="active"><a href="#" data-app="dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="#" data-app="inventory"><i class="fas fa-cube"></i> Inventory</a></li>
+                    <li><a href="#" data-app="orders"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <h2 id="page-title">Dashboard</h2>
+                <button class="btn btn-primary" id="new-btn"><i class="fas fa-plus"></i> New Item</button>
+            </header>
+            
+            <div class="content" id="app-container">
+                <!-- Apps load here -->
+                <div class="welcome">
+                    <h2>Welcome!</h2>
+                    <p>Select an app from the sidebar</p>
+                    <div class="app-grid">
+                        <div class="app-card" data-app="inventory">
+                            <i class="fas fa-cube"></i>
+                            <h3>Inventory</h3>
+                            <p>Track your items</p>
+                        </div>
+                        <div class="app-card" data-app="orders">
+                            <i class="fas fa-shopping-cart"></i>
+                            <h3>Orders</h3>
+                            <p>Manage orders</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="scripts/dashboard.js"></script>
+</body>
+</html>

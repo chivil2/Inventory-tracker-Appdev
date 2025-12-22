@@ -1,0 +1,99 @@
+.inventory-app {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.inventory-app h1 {
+    color: #4a6fa5;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+}
+
+#add-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#add-form input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    flex: 1;
+}
+
+.btn {
+    padding: 12px 20px;
+    background: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn:hover {
+    background: #166088;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #f8f9fa;
+    margin: 10px 0;
+    border-radius: 8px;
+}
+
+.item-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.qty-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-btn {
+    background: #e63946;
+    color: white;
+}
+
+.low-stock {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+}
+/* uy check nyo to kalokohan to alsin to ah */
+.empty {
+    text-align: center;
+    padding: 10px;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.empty:first-child {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #4a6fa5;
+}
+
+.empty:last-child {
+    font-style: italic;
+    color: #ff6b6b;
+    margin-top: 5px;
+}
