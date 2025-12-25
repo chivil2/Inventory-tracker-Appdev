@@ -62,9 +62,9 @@ document.addEventListener('DOMContentLoaded', function() {
             } else if (appName === 'inventory') {
                 loadInventory();
             } else if (appName === 'orders') {
-                appContainer.innerHTML = `<h2>${appName} App</h2><p>EeEEHHH?????</p>`;
+                loadOrder();
             } else{
-                appContainer.innerHTML = `<h2>${appName} Section</h2><p>Categories coming soon...</p>`;
+                loadCategories();
             }
         }, 300);
     }
@@ -165,4 +165,31 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
     }
+
+    function loadOrder() {
+        // Load the order management in an iframe
+        appContainer.innerHTML = `
+            <div class="order-container">
+                <iframe 
+                    src="apps/orders/index.html" 
+                    class="app-frame"
+                    title="Order Management"
+                ></iframe>
+            </div>
+        `;
+    }
+
+    function loadCategories() {
+        // Load the order management in an iframe
+        appContainer.innerHTML = `
+            <div class="categories-container">
+                <iframe 
+                    src="apps/categories/index.html" 
+                    class="app-frame"
+                    title="Item Categories"
+                ></iframe>
+            </div>
+        `;
+    }
+   
 });
