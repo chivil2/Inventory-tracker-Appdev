@@ -16,6 +16,7 @@
     margin-bottom: 30px;
 }
 
+/*Kaganapan sa may Current Inventory */
 .current-inventory-header {
     display: flex;
     justify-content: space-between;
@@ -97,6 +98,7 @@
     transition: background 0.2s;
 }
 
+/* Search and Filter Styles */
 #search-container,
 #filter-container {
     display: none;
@@ -137,6 +139,8 @@
     width: fit-content;
 }
 
+
+/* Status Colors */
 .status.in-stock {
     background: #4CAF50;
     color: white;
@@ -152,6 +156,7 @@
     color: white;
 }
 
+/* Item Action Buttons */
 .item-actions,
 .inventory-controls {
     display: flex;

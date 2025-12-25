@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentSearchTerm = '';
     let currentFilter = 'all';
 
+    /* Get status based on quantity */
     function getStatus(quantity){
         if (quantity === 0) return 'out-of-stock';
         if (quantity < 5) return 'low-stock';
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return 'In Stock';
     }
     
+    //for search toggle
    function toggleSearch() {
     const searchContainer = document.getElementById('search-container');
     const searchInput = document.getElementById('search-input');
@@ -38,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         renderItems();
     }
 }   
-
+//for filter toggle
 function toggleFilter() {
     const filterContainer = document.getElementById('filter-container');
 
@@ -64,7 +66,8 @@ function toggleFilter() {
 
     // Display items
     function renderItems() {
-
+        
+        // Filter items based on search term and filter
         let filteredItems = items.filter(item => {
         const matchesSearch = item.name.toLowerCase().includes(currentSearchTerm);
         
@@ -101,6 +104,7 @@ function toggleFilter() {
             </div>
         `;
 
+        // Generate item rows
         filteredItems.forEach(item => {
             const isLowStock = item.quantity < 5;
             const status = getStatus(item.quantity);
@@ -165,6 +169,7 @@ function toggleFilter() {
         }
     };
 
+    // Expose functions to global scope
     window.toggleSearch = toggleSearch;
     window.toggleFilter = toggleFilter;
     window.searchInventory = searchInventory;
