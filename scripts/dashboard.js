@@ -61,8 +61,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 loadDashboard();
             } else if (appName === 'inventory') {
                 loadInventory();
-            } else {
-                appContainer.innerHTML = `<h2>${appName} App</h2><p>HALUH NAG ORDER!</p>`;
+            } else if (appName === 'orders') {
+                appContainer.innerHTML = `<h2>${appName} App</h2><p>EeEEHHH?????</p>`;
+            } else{
+                appContainer.innerHTML = `<h2>${appName} Section</h2><p>Categories coming soon...</p>`;
             }
         }, 300);
     }
@@ -82,6 +84,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         <i class="fas fa-shopping-cart"></i>
                         <h3>Orders</h3>
                         <p>Manage orders</p>
+                    </div>
+                    <div class="app-card" data-app="categories">
+                         <i class="fas fa-list"></i>
+                        <h3>Categories</h3>
+                        <p>Check Categories</p>
                     </div>
                 </div>
             </div>

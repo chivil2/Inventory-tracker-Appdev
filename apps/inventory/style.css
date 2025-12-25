@@ -1,3 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .inventory-app {
     padding: 20px;
     max-width: 1200px;
@@ -7,6 +14,22 @@
 .inventory-app h1 {
     color: #4a6fa5;
     margin-bottom: 30px;
+}
+
+.current-inventory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.current-inventory-header h2 {
+    margin: 0;
+}
+
+.inventory-controls {
+    display: flex;
+    gap: 10px;
 }
 
 .card {
@@ -46,6 +69,54 @@
     background: #166088;
 }
 
+.inventory-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+.inventory-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.2fr 1.5fr;
+    font-weight: 600;
+    margin-top: 15px;
+    gap: 8px;
+    padding: 12px;
+    border-bottom: 2px solid #4a6fa5;
+    background: #f0f4fb;
+    text-transform: uppercase;
+}
+
+.inventory-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.2fr 1.5fr;
+    align-items: center;
+    padding: 12px;
+    gap: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.2s;
+}
+
+#search-container,
+#filter-container {
+    display: none;
+    margin-bottom: 15px;
+}
+
+#search-container.active,
+#filter-container.active {
+    display: block;
+}
+
+.search-input,
+.filter-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
 .item {
     display: flex;
     justify-content: space-between;
@@ -56,29 +127,61 @@
     border-radius: 8px;
 }
 
-.item-actions {
+.status {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+    width: fit-content;
+}
+
+.status.in-stock {
+    background: #4CAF50;
+    color: white;
+}
+
+.status.low-stock {
+    background: #FF9800;
+    color: white;
+}
+
+.status.out-of-stock {
+    background: #F44336;
+    color: white;
+}
+
+.item-actions,
+.inventory-controls {
     display: flex;
     gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 .qty-btn {
     width: 30px;
     height: 30px;
-    border-radius: 50%;
+    border-radius: 15%;
     border: none;
     cursor: pointer;
+    color: #666;
+    padding: 6px 10px;
+    transition: background 0.2s;
 }
 
+.qty-btn:hover {
+    background: #e2e6ea;
+}
+    
 .delete-btn {
     background: #e63946;
     color: white;
+    transition: background 0.2s;
 }
 
-.low-stock {
-    background: #fff3cd;
-    border-left: 4px solid #ffc107;
-}
-/* uy check nyo to kalokohan to alsin to ah */
+/* uy check nyo to kalokohan to alsin to ah - HINDI YAN bbaguhin*/
 .empty {
     text-align: center;
     padding: 10px;
