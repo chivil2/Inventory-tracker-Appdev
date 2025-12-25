@@ -16,16 +16,40 @@
             <h2>Add New Order</h2>
             <form id="add-order-form">
                 <input type="text" id="customer-name" placeholder="Customer name" required>
-                <input type="text" id="order-details" placeholder="Order details" required>
+                <input type="text" id="order-item" placeholder="Order Items" required>
+                <input type="number" id="order-qty" placeholder="Quantity" min="1" required>
                 <button type="submit" class="btn"><i class="fas fa-plus"></i>Add Order</button>
             </form>
         </div>
         
         <!-- Orders List -->
-        <div class="card">
-            <h2>Current Orders</h2>
+         <div class="card">
+            <div class="current-order-header">
+                <h2>Current Orders</h2>
+                <div class="order-controls">
+                    <button class="btn" onclick="toggleSearch()"><i class="fas fa-search"></i></button>
+                    <button class="btn" onclick="toggleFilter()"><i class="fas fa-filter"></i></button>
+                </div>
+            </div>
+            
+            <!-- Search container -->
+            <div id="search-container">
+                <input type="text" id="search-input" class="search-input" placeholder="Search orders..." oninput="searchOrders(this.value)">
+            </div>
+            
+            <!-- Filter container -->
+            <div id="filter-container">
+                <select id="filter-select" class="filter-select" onchange="filterOrders(this.value)">
+                    <option value="all">All Orders</option>
+                    <option value="pending">Pending</option>
+                    <option value="completed">Completed</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+            </div>
+            
             <div id="orders-list">
                 <p class="empty">No orders yet. Add your first order!</p>
+                <p class="empty">Edi wag! Hmph!!</p>
             </div>
         </div>
     </div>

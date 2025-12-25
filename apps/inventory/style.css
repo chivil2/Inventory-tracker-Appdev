@@ -16,23 +16,6 @@
     margin-bottom: 30px;
 }
 
-/*Kaganapan sa may Current Inventory */
-.current-inventory-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.current-inventory-header h2 {
-    margin: 0;
-}
-
-.inventory-controls {
-    display: flex;
-    gap: 10px;
-}
-
 .card {
     background: white;
     padding: 25px;
@@ -76,27 +59,76 @@
       gap: 8px;
     }
 
-.inventory-header {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1.2fr 1.5fr;
-    font-weight: 600;
-    margin-top: 15px;
-    gap: 8px;
-    padding: 12px;
-    border-bottom: 2px solid #4a6fa5;
-    background: #f0f4fb;
-    text-transform: uppercase;
+/* Current Inventory Header */
+.current-inventory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-.inventory-row {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1.2fr 1.5fr;
-    align-items: center;
-    padding: 12px;
-    gap: 16px;
-    border-bottom: 1px solid #f0f0f0;
-    transition: background 0.2s;
+.current-inventory-header h2 {
+    margin: 0;
 }
+
+.inventory-controls {
+    display: flex;
+    gap: 10px;
+}
+
+/* Inventory Table Styles */
+.inventory-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.inventory-table thead {
+    background: #f0f4fb;
+}
+
+.inventory-table th {
+    background: #f0f4fb;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #4a6fa5;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: #333;
+}
+
+.inventory-table td {
+    padding: 12px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+}
+
+.inventory-table tbody tr {
+    transition: background 0.2s;
+    background: white;
+}
+
+.inventory-table tbody tr:hover {
+    background: #f9f9f9;
+}
+
+.inventory-table tbody tr td:first-child {
+    font-weight: 500;
+    color: #333;
+}
+
+.item-name {
+    font-weight: 300;
+    color: #333;
+}
+
+.item-qty {
+    font-weight: 600;
+    color: #4a6fa5;
+    text-align: center;
+}
+
 
 /* Search and Filter Styles */
 #search-container,
@@ -157,8 +189,7 @@
 }
 
 /* Item Action Buttons */
-.item-actions,
-.inventory-controls {
+.item-actions {
     display: flex;
     gap: 10px;
     align-items: center;

@@ -4,3 +4,238 @@
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.orders-app {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.orders-app h1 {
+    color: #4a6fa5;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+}
+
+/* Add Order Form Styles */
+#add-order-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#add-order-form input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    flex: 1;
+}
+
+.btn {
+    padding: 12px 20px;
+    background: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn:hover {
+    background: #166088;
+}
+
+/* Orders List Styles */
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.orders-table thead {
+    background: #f0f4fb;
+}
+
+.orders-table th {
+    background: #f0f4fb;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #4a6fa5;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: #333;
+}
+
+.orders-table td {
+    padding: 12px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+}
+
+.orders-table tbody tr {
+    transition: background 0.2s;
+    background: white;
+}
+
+.orders-table tbody tr:hover {
+    background: #f9f9f9;
+}
+
+.customer-name {
+    font-weight: 300;
+    color: #333;
+}
+
+.order-qty {
+    font-weight: 400;
+    color: #4a6fa5;
+    text-align: center;
+}
+
+.order-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+/*Current Inventory Styles*/
+.current-order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.current-order-header h2 {
+    margin: 0;
+}
+
+.order-controls {
+    display: flex;
+    gap: 10px;
+}
+
+/* Customer and Item columns */
+.customer-name {
+    font-weight: 500;
+    color: #333;
+}
+
+.order-qty {
+    font-weight: 600;
+    color: #4a6fa5;
+    text-align: center;
+}
+
+/* Status Styles */
+.status {
+    padding: 6px 12px; 
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+    display: inline-block; 
+    color: white;
+}
+
+.status.pending {
+    background: #FF9800;
+}
+
+.status.completed {
+    background: #4CAF50;
+}
+
+.status.cancelled {
+    background: #F44336;
+}
+
+/* Action Buttons */
+.order-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.btn {
+    padding: 8px 12px;
+    background: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn:hover {
+    background: #166088;
+}
+
+.delete-btn {
+    background: #e63946;
+}
+
+.delete-btn:hover {
+    background: #c62e39;
+}
+
+.status-btn {
+    background: #4a6fa5;
+}
+
+.status-btn:hover {
+    background: #166088;
+}
+
+/* Search and Filter Styles */
+#search-container,
+#filter-container {
+    display: none;
+    margin-bottom: 15px;
+}
+
+#search-container.active,
+#filter-container.active {
+    display: block;
+}
+
+.search-input,
+.filter-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.empty {
+    text-align: center;
+    padding: 10px;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.empty:first-child {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #4a6fa5;
+}
+
+.empty:last-child {
+    font-style: italic;
+    color: #ff6b6b;
+    margin-top: 5px;
+}

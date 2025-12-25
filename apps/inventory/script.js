@@ -96,12 +96,16 @@ function toggleFilter() {
         }
         
         let html = `
-            <div class="inventory-header">
-                <div>Item Name</div>
-                <div>Quantity</div>
-                <div>Status</div>
-                <div>Actions</div>
-            </div>
+            <table class="inventory-table">
+                <thead> 
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Quantity</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
         `;
 
         // Generate item rows
@@ -111,27 +115,32 @@ function toggleFilter() {
             const statusUpdate = getStatusUpdate(item.quantity);
 
             html += `
-                <div class="inventory-row" ${isLowStock >0 ? 'low-stock' : ''}" data-id="${item.id}">
-                    <div class ="item-name">
+                <tr class="inventory-row ${isLowStock ? 'low-stock' : ''}" data-id="${item.id}">
+                    <td class="item-name">
                         ${item.name}
-                        ${isLowStock > 0 ? '<span class="warning">⚠️</span>' : ''}
-                    </div>
-                    <div class="item-qty"> ${item.quantity}</div>
-                    <span class="status ${status}">${statusUpdate}</span>
-                    <div class="item-actions">
+                        ${isLowStock ? '<span class="warning">⚠️</span>' : ''}
+                    </td>
+                    <td class="item-qty">${item.quantity}</td>
+                    <td><span class="status ${status}">${statusUpdate}</span></td>
+                    <td class="item-actions">
                         <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
                         <button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button>
                         <button class="delete-btn btn" onclick="deleteItem(${item.id})">
                             <i class="fas fa-trash"></i>
                         </button>
-                    </div>   
-                </div>
+                    </td>   
+                </tr>
             `;
         });
-        
+
+        html += `
+                </tbody>
+            </table>
+        `; 
+
         inventoryList.innerHTML = html;
     }
-    
+
     // Add item
     form.addEventListener('submit', function(e) {
         e.preventDefault();
