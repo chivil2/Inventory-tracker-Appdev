@@ -2,15 +2,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('add-form');
     const inventoryList = document.getElementById('inventory-list');
     
-    // Sample data
-    let items = [
-        { id: 1, name: "Notebooks", quantity: 12 },
-        { id: 2, name: "Pens", quantity: 5 },
-        { id: 3, name: "Markers", quantity: 3 }
-    ];
-
+    let items = [];
     let currentSearchTerm = '';
     let currentFilter = 'all';
+
+    const API_URL = '/api/items';
 
     /* Get status based on quantity */
     function getStatus(quantity){
@@ -110,12 +106,12 @@ function toggleFilter() {
 
         // Generate item rows
         filteredItems.forEach(item => {
-            const isLowStock = item.quantity < 5;
+            const isLowStock = item.quantity < item.lowStockThreshold;
             const status = getStatus(item.quantity);
             const statusUpdate = getStatusUpdate(item.quantity);
 
             html += `
-                <tr class="inventory-row ${isLowStock ? 'low-stock' : ''}" data-id="${item.id}">
+                <tr class="inventory-row ${isLowStock ? 'low-stock' : ''}" data-id="${item._id}">
                     <td class="item-name">
                         ${item.name}
                         ${isLowStock ? '<span class="warning">⚠️</span>' : ''}
@@ -123,9 +119,9 @@ function toggleFilter() {
                     <td class="item-qty">${item.quantity}</td>
                     <td><span class="status ${status}">${statusUpdate}</span></td>
                     <td class="item-actions">
-                        <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
-                        <button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button>
-                        <button class="delete-btn btn" onclick="deleteItem(${item.id})">
+                        <button class="qty-btn" onclick="updateQty('${item._id}', 1)">+</button>
+                        <button class="qty-btn" onclick="updateQty('${item._id}', -1)">-</button>
+                        <button class="delete-btn btn" onclick="deleteItem('${item._id}')">
                             <i class="fas fa-trash"></i>
                         </button>
                     </td>   
@@ -141,40 +137,76 @@ function toggleFilter() {
         inventoryList.innerHTML = html;
     }
 
+    async function fetchItems() {
+        try {
+            const response = await fetch(API_URL);
+            items = await response.json();
+            renderItems();
+        } catch (error) {
+            console.error('Error fetching items:', error);
+        }
+    }
+
     // Add item
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         const name = document.getElementById('item-name').value.trim();
-        const qty = parseInt(document.getElementById('item-qty').value);
+        const quantity = parseInt(document.getElementById('item-qty').value);
         
-        if (name && qty > 0) {
-            const newItem = {
-                id: Date.now(),
-                name: name,
-                quantity: qty
-            };
+        if (name && quantity > 0) {
+            const newItem = { name, quantity };
             
-            items.push(newItem);
-            renderItems();
-            form.reset();
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newItem)
+                });
+                const createdItem = await response.json();
+                items.push(createdItem);
+                renderItems();
+                form.reset();
+                window.parent.postMessage('updateStats', '*');
+            } catch (error) {
+                console.error('Error adding item:', error);
+            }
         }
     });
     
     // Global functions for buttons
-    window.updateQty = function(id, change) {
-        const item = items.find(i => i.id === id);
+    window.updateQty = async function(id, change) {
+        const item = items.find(i => i._id === id);
         if (item) {
-            item.quantity += change;
-            if (item.quantity < 0) item.quantity = 0;
-            renderItems();
+            const newQuantity = item.quantity + change;
+            if (newQuantity < 0) return;
+
+            try {
+                const response = await fetch(`${API_URL}/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ quantity: newQuantity })
+                });
+                const updatedItem = await response.json();
+                item.quantity = updatedItem.quantity;
+                renderItems();
+                window.parent.postMessage('updateStats', '*');
+            } catch (error) {
+                console.error('Error updating quantity:', error);
+            }
         }
     };
     
-    window.deleteItem = function(id) {
+    window.deleteItem = async function(id) {
         if (confirm('Delete this item?')) {
-            items = items.filter(i => i.id !== id);
-            renderItems();
+            try {
+                await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+                items = items.filter(i => i._id !== id);
+                renderItems();
+                window.parent.postMessage('updateStats', '*');
+            } catch (error) {
+                console.error('Error deleting item:', error);
+            }
         }
     };
 
@@ -184,5 +216,5 @@ function toggleFilter() {
     window.searchInventory = searchInventory;
     window.filterInventory = filterInventory;
     
-    renderItems();
+    fetchItems();
 });

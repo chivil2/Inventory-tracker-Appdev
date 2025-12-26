@@ -7,6 +7,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const pageTitle = document.getElementById('page-title');
     const newBtn = document.getElementById('new-btn');
     
+    updateDashboardStats();
+
+    // Listen for messages from iframes
+    window.addEventListener('message', function(e) {
+        if (e.data === 'updateStats') {
+            console.log('Stat update message received from iframe');
+            updateDashboardStats();
+        }
+    });
+
     // Navigation click
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
@@ -56,17 +66,15 @@ document.addEventListener('DOMContentLoaded', function() {
         appContainer.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
         
         // Load app content
-        setTimeout(() => {
-            if (appName === 'dashboard') {
-                loadDashboard();
-            } else if (appName === 'inventory') {
-                loadInventory();
-            } else if (appName === 'orders') {
-                loadOrder();
-            } else{
-                loadCategories();
-            }
-        }, 300);
+        if (appName === 'dashboard') {
+            loadDashboard();
+        } else if (appName === 'inventory') {
+            loadInventory();
+        } else if (appName === 'orders') {
+            loadOrder();
+        } else{
+            loadCategories();
+        }
     }
     
     function loadDashboard() {
@@ -99,28 +107,28 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-header">
-                            <div class="stat-value">0</div>
+                            <div class="stat-value" data-stat="total-items">0</div>
                             <i class="fas fa-cube"></i>
                         </div>
                         <div class="stat-title">Total Items</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-header">
-                            <div class="stat-value">0</div>
+                            <div class="stat-value" data-stat="low-stock-items">0</div>
                             <i class="fas fa-exclamation-circle"></i>
                             </div>
                             <div class="stat-title">Low Stock Items</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-header">
-                            <div class="stat-value">0</div>
+                            <div class="stat-value" data-stat="pending-orders">0</div>
                             <i class="fas fa-shopping-cart"></i>
                             </div>
                             <div class="stat-title">Pending Orders</div>
                     </div>
                      <div class="stat-card">
                         <div class="stat-header">
-                            <div class="stat-value">0</div>
+                            <div class="stat-value" data-stat="categories">0</div>
                             <i class="fas fa-list"></i>
                             </div>
                             <div class="stat-title">Categories</div>
@@ -137,6 +145,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
         `;
+
+        updateDashboardStats();
         
         // Re-attach event listeners
         document.querySelectorAll('.app-card').forEach(card => {
@@ -151,6 +161,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 loadApp(appName);
             });
         });
+    }
+
+    async function updateDashboardStats() {
+        console.log("Updating dashboard stats...");
+        try {
+            const res = await fetch('/api/items');
+            if (!res.ok) {
+                throw new Error(`Failed to fetch: ${res.status}`);
+            }
+            const items = await res.json();
+            
+            const totalItems = items.length;
+            const lowStockItems = items.filter(item => item.quantity <= item.lowStockThreshold).length;
+
+            const totalItemsEl = document.querySelector('[data-stat="total-items"]');
+            const lowStockItemsEl = document.querySelector('[data-stat="low-stock-items"]');
+
+            if (totalItemsEl) totalItemsEl.textContent = totalItems;
+            if (lowStockItemsEl) lowStockItemsEl.textContent = lowStockItems;
+
+        } catch (error) {
+            console.error("Error updating dashboard stats:", error);
+        }
     }
     
     function loadInventory() {
