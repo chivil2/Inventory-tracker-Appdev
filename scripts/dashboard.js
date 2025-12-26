@@ -61,8 +61,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 loadDashboard();
             } else if (appName === 'inventory') {
                 loadInventory();
-            } else {
-                appContainer.innerHTML = `<h2>${appName} App</h2><p>HALUH NAG ORDER!</p>`;
+            } else if (appName === 'orders') {
+                loadOrder();
+            } else{
+                loadCategories();
             }
         }, 300);
     }
@@ -83,8 +85,57 @@ document.addEventListener('DOMContentLoaded', function() {
                         <h3>Orders</h3>
                         <p>Manage orders</p>
                     </div>
+                    <div class="app-card" data-app="categories">
+                         <i class="fas fa-list"></i>
+                        <h3>Categories</h3>
+                        <p>Check Categories</p>
+                    </div>
                 </div>
             </div>
+
+            <div class="status-overview"> 
+                <h2>Quick Stats</h2>
+                    <p>Overview of the Status of Inventory eme eme</p>
+                    <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-value">0</div>
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <div class="stat-title">Total Items</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-value">0</div>
+                            <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="stat-title">Low Stock Items</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-value">0</div>
+                            <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="stat-title">Pending Orders</div>
+                    </div>
+                     <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-value">0</div>
+                            <i class="fas fa-list"></i>
+                            </div>
+                            <div class="stat-title">Categories</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-required">
+                    <h2>Inventory Alerts <i class="fas fa-exclamation-triangle"></i></h2>
+                    <p>Items that need your attention</p>
+                    <div class="alert-card">
+                        <h3>No items need attention - ako lang may kailangan</h3>
+                        <p>All items are sufficiently stocked.</p>
+                    </div>
+                </div>
         `;
         
         // Re-attach event listeners
@@ -114,4 +165,31 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
     }
+
+    function loadOrder() {
+        // Load the order management in an iframe
+        appContainer.innerHTML = `
+            <div class="order-container">
+                <iframe 
+                    src="apps/orders/index.html" 
+                    class="app-frame"
+                    title="Order Management"
+                ></iframe>
+            </div>
+        `;
+    }
+
+    function loadCategories() {
+        // Load the order management in an iframe
+        appContainer.innerHTML = `
+            <div class="categories-container">
+                <iframe 
+                    src="apps/categories/index.html" 
+                    class="app-frame"
+                    title="Item Categories"
+                ></iframe>
+            </div>
+        `;
+    }
+   
 });

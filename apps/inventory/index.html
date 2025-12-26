@@ -17,20 +17,41 @@
             <form id="add-form">
                 <input type="text" id="item-name" placeholder="Item name" required>
                 <input type="number" id="item-qty" placeholder="Quantity" min="1" required>
-                <button type="submit" class="btn"><i class="fas fa-plus"></i> Add</button>
+                <button type="submit" class="btn"><i class="fas fa-plus"></i>Add</button>
             </form>
         </div>
         
         <!-- Inventory List -->
         <div class="card">
-            <h2>Current Inventory</h2>
+            <div class ="current-inventory-header">
+                <h2>Current Inventory</h2>
+                <div class ="inventory-controls">
+                    <button class="btn" onclick="toggleSearch()"><i class="fas fa-search"></i></button>
+                    <button class="btn" onclick="toggleFilter()"><i class="fas fa-filter"></i></button>
+                </div>
+            </div>
+
+        <!-- Search and Filter Controls -->
+            <div id="search-container">
+                <input type="text" id="search-input" placeholder="Search items..." oninput="searchInventory(this.value)" 
+                class="search-input">
+            </div>
+
+            <div id="filter-container">
+                    <select id="filter-select" onchange="filterInventory(this.value)" class="filter-select">
+                        <option value="all">All Items</option>
+                        <option value="low">Low Stock (&lt;5)</option>
+                        <option value="out">Out of Stock</option>
+                    </select>
+            </div>
+
             <div id="inventory-list">
                 <p class="empty">No items yet. Add your first item!</p>
                 <p class="empty">or not ahah 😜</p>
             </div>
         </div>
     </div>
-    
+
     <script src="script.js"></script>
 </body>
 </html>

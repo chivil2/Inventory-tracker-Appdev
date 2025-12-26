@@ -5,13 +5,13 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.inventory-app {
+.orders-app {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-.inventory-app h1 {
+.orders-app h1 {
     color: #4a6fa5;
     margin-bottom: 30px;
 }
@@ -24,13 +24,14 @@
     margin-bottom: 25px;
 }
 
-#add-form {
+/* Add Order Form Styles */
+#add-order-form {
     display: flex;
     gap: 10px;
     margin-top: 15px;
 }
 
-#add-form input {
+#add-order-form input {
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -53,41 +54,18 @@
     background: #166088;
 }
 
-.inventory-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-/* Current Inventory Header */
-.current-inventory-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.current-inventory-header h2 {
-    margin: 0;
-}
-
-.inventory-controls {
-    display: flex;
-    gap: 10px;
-}
-
-/* Inventory Table Styles */
-.inventory-table {
+/* Orders List Styles */
+.orders-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
 }
 
-.inventory-table thead {
+.orders-table thead {
     background: #f0f4fb;
 }
 
-.inventory-table th {
+.orders-table th {
     background: #f0f4fb;
     padding: 12px;
     text-align: left;
@@ -98,37 +76,129 @@
     color: #333;
 }
 
-.inventory-table td {
+.orders-table td {
     padding: 12px;
     border-bottom: 1px solid #f0f0f0;
     vertical-align: middle;
 }
 
-.inventory-table tbody tr {
+.orders-table tbody tr {
     transition: background 0.2s;
     background: white;
 }
 
-.inventory-table tbody tr:hover {
+.orders-table tbody tr:hover {
     background: #f9f9f9;
 }
 
-.inventory-table tbody tr td:first-child {
-    font-weight: 500;
-    color: #333;
-}
-
-.item-name {
+.customer-name {
     font-weight: 300;
     color: #333;
 }
 
-.item-qty {
+.order-qty {
+    font-weight: 400;
+    color: #4a6fa5;
+    text-align: center;
+}
+
+.order-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+/*Current Inventory Styles*/
+.current-order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.current-order-header h2 {
+    margin: 0;
+}
+
+.order-controls {
+    display: flex;
+    gap: 10px;
+}
+
+/* Customer and Item columns */
+.customer-name {
+    font-weight: 500;
+    color: #333;
+}
+
+.order-qty {
     font-weight: 600;
     color: #4a6fa5;
     text-align: center;
 }
 
+/* Status Styles */
+.status {
+    padding: 6px 12px; 
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+    display: inline-block; 
+    color: white;
+}
+
+.status.pending {
+    background: #FF9800;
+}
+
+.status.completed {
+    background: #4CAF50;
+}
+
+.status.cancelled {
+    background: #F44336;
+}
+
+/* Action Buttons */
+.order-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.btn {
+    padding: 8px 12px;
+    background: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn:hover {
+    background: #166088;
+}
+
+.delete-btn {
+    background: #e63946;
+}
+
+.delete-btn:hover {
+    background: #c62e39;
+}
+
+.status-btn {
+    background: #4a6fa5;
+}
+
+.status-btn:hover {
+    background: #166088;
+}
 
 /* Search and Filter Styles */
 #search-container,
@@ -151,73 +221,6 @@
     font-size: 14px;
 }
 
-.item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    background: #f8f9fa;
-    margin: 10px 0;
-    border-radius: 8px;
-}
-
-.status {
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    text-align: center;
-    white-space: nowrap;
-    width: fit-content;
-}
-
-
-/* Status Colors */
-.status.in-stock {
-    background: #4CAF50;
-    color: white;
-}
-
-.status.low-stock {
-    background: #FF9800;
-    color: white;
-}
-
-.status.out-of-stock {
-    background: #F44336;
-    color: white;
-}
-
-/* Item Action Buttons */
-.item-actions {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.qty-btn {
-    width: 30px;
-    height: 30px;
-    border-radius: 15%;
-    border: none;
-    cursor: pointer;
-    color: #666;
-    padding: 6px 10px;
-    transition: background 0.2s;
-}
-
-.qty-btn:hover {
-    background: #e2e6ea;
-}
-    
-.delete-btn {
-    background: #e63946;
-    color: white;
-    transition: background 0.2s;
-}
-
-/* uy check nyo to kalokohan to alsin to ah - HINDI YAN bbaguhin*/
 .empty {
     text-align: center;
     padding: 10px;
